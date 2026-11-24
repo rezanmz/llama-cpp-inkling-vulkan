@@ -11279,7 +11279,7 @@ static void ggml_vk_flash_attn(ggml_backend_vk_context * ctx, vk_context& subctx
     }();
     const uint32_t fa_split_k_mult =
         (fa_split_k_mult_env > 0 && N == 1 && KV >= 4096) ? fa_split_k_mult_env :
-        (ctx->device->vendor_id == VK_VENDOR_ID_AMD && N == 1 && KV >= 4096) ? 8u : 2u;
+        (ctx->device->vendor_id == VK_VENDOR_ID_AMD && N == 1 && KV >= 4096) ? 4u : 2u;
 
     // Try to use split_k when KV is large enough to be worth the overhead.
     if (gqa_ratio > 1 && workgroups_x <= Br) {
